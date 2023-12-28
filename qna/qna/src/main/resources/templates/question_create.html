@@ -1,0 +1,15 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <form th:action="@{/question/create}" method="get">
+        <h5 class="border-bottom my-3 py-2" th:text="제목"></h5>
+        <textarea name="subject" id="subject" rows="1" class="form-control"></textarea>
+        <h5 class="border-bottom my-3 py-2" th:text="내용"></h5>
+        <textarea name="content" id="content" rows="10" class="form-control"></textarea>
+        <input type="submit" value="질문등록" class="btn btn-primary my-2">
+    </form>
+
+    <form th:action="@{/question/list}" method="get">
+        <input type="submit" value="목록보기" class="btn btn-primary my-2">
+    </form>
+</div>
+</html>
