@@ -10,7 +10,11 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     Question findBySubject(String s);
+
     Question findByContent(String c);
+
     Question findBySubjectAndContent(String s, String c);
+
     List<Question> findBySubjectLike(String s);
+
 }

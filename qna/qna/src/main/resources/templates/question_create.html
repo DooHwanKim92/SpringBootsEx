@@ -1,6 +1,6 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
-    <form th:action="@{/question/create}" method="get">
+    <form th:action="@{/question/create}" method="post">
         <h5 class="border-bottom my-3 py-2" th:text="제목"></h5>
         <textarea name="subject" id="subject" rows="1" class="form-control"></textarea>
         <h5 class="border-bottom my-3 py-2" th:text="내용"></h5>

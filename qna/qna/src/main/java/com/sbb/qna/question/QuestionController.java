@@ -1,9 +1,12 @@
 package com.sbb.qna.question;
 
+import com.sbb.qna.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -18,23 +21,32 @@ public class QuestionController {
         model.addAttribute("questionList",questionList);
         return "question_list";
     }
+
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
         Question question = this.questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "question_detail";
     }
-    @GetMapping("/create/1")
-    public String createScreen() {
 
+    @PostMapping ("/create/form")
+    public String createForm() {
         return "question_create";
     }
 
-    @GetMapping("/create")
-    public String create(Model model, @RequestParam("subject") String subject, @RequestParam("content") String content) {
-
-        this.questionService.create(subject,content);
+    @PostMapping("/create")
+    public String create(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
 
         return "redirect:/question/list";
     }
+
+    @GetMapping("/create")
+    public String questionCreate(QuestionForm questionForm) {
+        return "question_form";
+    }
+
 }
