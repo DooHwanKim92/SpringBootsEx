@@ -2,6 +2,7 @@ package com.sbb.qna_ex_1.answer;
 
 import java.time.LocalDateTime;
 
+import com.sbb.qna_ex_1.user.SiteUser;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -25,4 +26,7 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private SiteUser author;
 }

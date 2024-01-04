@@ -1,6 +1,7 @@
 package com.sbb.qna_ex_1.question;
 
 import com.sbb.qna_ex_1.DataNotFoundException;
+import com.sbb.qna_ex_1.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +32,11 @@ public class QuestionService {
         }
     }
 
-    public void create(String subject, String content) {
+    public void create(String subject, String content, SiteUser user) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
+        q.setAuthor(user);
         q.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(q);
     }
